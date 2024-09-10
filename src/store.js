@@ -3,7 +3,10 @@
  */
 class Store {
   constructor(initState = {}) {
-    this.state = initState;
+    this.state = {
+      ...initState,
+      nextCode: 1, // Начальное значение для уникальных кодов
+    };
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -42,9 +45,11 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    const newCode = this.state.nextCode;
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }],
+      list: [...this.state.list, { code: newCode, title: 'Новая запись' }],
+      nextCode: newCode + 1, // Увеличиваем счетчик
     });
   }
 
