@@ -5,7 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = {
       ...initState,
-      nextCode: 1, // Начальное значение для уникальных кодов
+      nextCode: 8, // Начальное значение для уникальных кодов
     };
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -74,6 +74,9 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          if (item.selected) {
+            item.selectionCount = (item.selectionCount || 0) + 1;
+          }
         } else {
           item.selected = false;
         }
