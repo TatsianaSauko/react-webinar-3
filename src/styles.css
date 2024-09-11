@@ -61,6 +61,5 @@ body {
 }
 
 .Item-selectionCount {
-  font-size: 12px;
-  padding: 20px 20px 20px 10px;
+  display: inline-block;
 }

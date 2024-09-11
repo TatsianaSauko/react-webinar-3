@@ -5,7 +5,6 @@ class Store {
   constructor(initState = {}) {
     this.state = {
       ...initState,
-      nextCode: 8, // Начальное значение для уникальных кодов
     };
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -45,7 +44,7 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
-    const newCode = this.state.nextCode;
+    const newCode = this.generateUniqueCode();
     this.setState({
       ...this.state,
       list: [...this.state.list, { code: newCode, title: 'Новая запись' }],
@@ -84,6 +83,31 @@ class Store {
       }),
     });
   }
+
+  generateUniqueCode() {
+    const codes = this.state.list.map(item => item.code);
+    return Math.max(...codes, 0) + 1;
+  }
+
+  getSelectionCountText(count) {
+    const lastDigit = count % 10;
+    const lastTwoDigits = count % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+      return `${count} раз`;
+    }
+
+    if (lastDigit === 1) {
+      return `${count} раз`;
+    }
+
+    if (lastDigit >= 2 && lastDigit <= 4) {
+      return `${count} раза`;
+    }
+
+    return `${count} раз`;
+  }
+
 }
 
 export default Store;
