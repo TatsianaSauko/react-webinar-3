@@ -30,7 +30,7 @@ function App({ store }) {
                 <div className="Item-title">{item.title}
                 {item.selectionCount > 0 && (
                   <div className="Item-selectionCount">
-                    &nbsp;(Выделяли {store.getSelectionCountText(item.selectionCount)})
+                    &nbsp;| Выделяли {store.getSelectionCountText(item.selectionCount)}
                   </div>
                 )}
                 </div>
