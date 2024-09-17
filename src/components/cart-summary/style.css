@@ -1,0 +1,15 @@
+.CartSummary {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.CartSummary-content {
+  margin: 0 20px 0 15px;
+  font-weight: bold;
+}
+
+.CartSummary-empty {
+  margin: 0 20px 0 15px;
+  font-weight: bold;
+}

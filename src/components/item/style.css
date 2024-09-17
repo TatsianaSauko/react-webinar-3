@@ -21,5 +21,12 @@
 .Item-actions {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+  padding: 20px 21px 20px 22px;
+}
+
+.Item-price,
+.Item-quantity {
+  min-width: 100px;
+ text-align: end;
+ padding-top: 21px;
 }
