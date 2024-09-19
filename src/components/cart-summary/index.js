@@ -1,20 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { plural } from '../../utils';
+import { plural, formatPrice } from '../../utils';
 import './style.css';
 
-function CartSummary ({ cart = [], onOpenCart }) {
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+function CartSummary({ cart = [], onOpenCart }) {
+  const uniqueItemsTotal = cart.length;
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+  const formattedPrice = formatPrice(totalPrice);
 
-  const cartContent = totalItems > 0
-    ? <div className='CartSummary-content'>{totalItems} {plural(totalItems, { one: 'товар', few: 'товара', many: 'товаров' })} / {totalPrice} ₽</div>
-    : <div className='CartSummary-empty'>пусто</div>;
+  const cartContent =
+    uniqueItemsTotal > 0 ? (
+      <div className="CartSummary-content">
+        {uniqueItemsTotal}{' '}
+        {plural(uniqueItemsTotal, { one: 'товар', few: 'товара', many: 'товаров' })} /{' '}
+        {formattedPrice} ₽
+      </div>
+    ) : (
+      <div className="CartSummary-empty">пусто</div>
+    );
 
   return (
     <div className="CartSummary">
       B корзине: {cartContent}
-      <button onClick={onOpenCart}>Перейти</button>
+      <button onClick={() => onOpenCart(true)}>Перейти</button>
     </div>
   );
 }

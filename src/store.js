@@ -3,7 +3,10 @@
  */
 class Store {
   constructor(initState = {}) {
-    this.state = initState;
+    this.state = {
+      ...initState,
+      isCartOpen: false,
+    };
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -48,7 +51,7 @@ class Store {
         newCart = this.state.cart.map(cartItem =>
           cartItem.code === code
             ? { ...cartItem, quantity: cartItem.quantity + 1, price: cartItem.price + item.price }
-            : cartItem
+            : cartItem,
         );
       } else {
         newCart = [...this.state.cart, { ...item, quantity: 1 }];
@@ -63,6 +66,10 @@ class Store {
       ...this.state,
       cart: this.state.cart.filter(item => item.code !== code),
     });
+  }
+
+  setIsCartOpen(isOpen) {
+    this.setState({ ...this.state, isCartOpen: isOpen });
   }
 }
 

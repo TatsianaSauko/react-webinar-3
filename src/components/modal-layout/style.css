@@ -1,6 +1,6 @@
-.CartModal {
+.ModalLayout {
   position: fixed;
-   top: 0;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -11,7 +11,7 @@
   z-index: 1;
 }
 
-.CartModal-content {
+.ModalLayout-content {
   max-width: 959px;
   margin: 0 32.5px;
   width: 100%;
@@ -28,24 +28,4 @@
   position: absolute;
   top: 32px;
   right: 32px;
-}
-
-.CartModal-footer {
-  padding: 21px 120px 21px 0;
-  font-weight: 700;
-  display: flex;
-  justify-content: end;
-  font-size: 18px;
-  line-height: 20.7px;
-}
-
-.CartModal-total-label {
-  margin-right: 10px;
-  display: inline-block;
-}
-
-.CartModal-total-value {
-  min-width: 100px;
-  text-align: right;
-  display: inline-block;
 }

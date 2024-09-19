@@ -33,4 +33,3 @@ Item.propTypes = {
 };
 
 export default React.memo(Item);
-

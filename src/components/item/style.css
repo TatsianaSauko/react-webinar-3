@@ -4,11 +4,6 @@
   transition: background-color 1s;
 }
 
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
-}
-
 .Item-code {
   padding: 20px 10px 20px 20px;
 }
@@ -27,6 +22,6 @@
 .Item-price,
 .Item-quantity {
   min-width: 100px;
- text-align: end;
- padding-top: 21px;
+  text-align: end;
+  padding-top: 21px;
 }
