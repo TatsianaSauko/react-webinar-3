@@ -8,6 +8,7 @@ import ModalLayout from './components/modal-layout';
 
 function App({ store }) {
   const state = store.getState();
+  console.log(store.getState());
 
   const callbacks = {
     onAddToCart: useCallback(
@@ -32,11 +33,16 @@ function App({ store }) {
 
   return (
     <PageLayout>
-      <Head title="Магазин" />
-      <CartSummary cart={state.cart} onOpenCart={callbacks.onSetModal} />
+      <Head title="Магазин">
+        <CartSummary cart={state.cart} onOpenCart={callbacks.onSetModal} />
+      </Head>
       <List list={state.list} onAction={callbacks.onAddToCart} buttonText="Добавить" />
-      <ModalLayout isOpen={state.isCartOpen} onClose={() => callbacks.onSetModal(false)}>
-        <Cart cart={state.cart} onRemoveFromCart={callbacks.onRemoveFromCart} />
+      <ModalLayout isOpen={state.isCartOpen}>
+        <Cart
+          cart={state.cart}
+          onRemoveFromCart={callbacks.onRemoveFromCart}
+          onClose={() => callbacks.onSetModal(false)}
+        />
       </ModalLayout>
     </PageLayout>
   );

@@ -49,9 +49,7 @@ class Store {
       let newCart;
       if (cartItem) {
         newCart = this.state.cart.map(cartItem =>
-          cartItem.code === code
-            ? { ...cartItem, quantity: cartItem.quantity + 1, price: cartItem.price + item.price }
-            : cartItem,
+          cartItem.code === code ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem,
         );
       } else {
         newCart = [...this.state.cart, { ...item, quantity: 1 }];

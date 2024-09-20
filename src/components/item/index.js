@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatPrice } from '../../utils';
 import './style.css';
 
 function Item({ item, onAction, buttonText }) {
@@ -8,14 +9,18 @@ function Item({ item, onAction, buttonText }) {
     onAction(item.code);
   };
 
+  const formattedPrice = formatPrice(item.price);
+
   return (
     <div className="Item">
       <div className="Item-code">{item.code}</div>
       <div className="Item-title">{item.title}</div>
-      <div className="Item-price">{item.price} ₽</div>
-      {item.quantity && <div className="Item-quantity">{item.quantity} шт.</div>}
+      <div className="Item-price">{formattedPrice} ₽</div>
+      {item.quantity && <div className="Item-quantity">{item.quantity} шт</div>}
       <div className="Item-actions">
-        <button onClick={handleAction}>{buttonText}</button>
+        <button className="Button" onClick={handleAction}>
+          {buttonText}
+        </button>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+  font-size: 18px;
 }
 
 .CartSummary-content {
@@ -12,4 +13,9 @@
 .CartSummary-empty {
   margin: 0 20px 0 15px;
   font-weight: bold;
+}
+
+.Button-go {
+  padding: 3px 12px;
+  line-height: 14.95px;
 }

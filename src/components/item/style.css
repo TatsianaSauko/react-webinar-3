@@ -24,4 +24,10 @@
   min-width: 100px;
   text-align: end;
   padding-top: 21px;
+  font-size: 18px;
+}
+
+.Button {
+  padding: 3px 7px;
+  line-height: 14.95px;
 }

@@ -1,5 +1,5 @@
 .Cart-body {
-  padding-top: 71px;
+  padding-top: 70px;
 }
 
 .Cart-footer {
@@ -20,4 +20,19 @@
   min-width: 100px;
   text-align: right;
   display: inline-block;
+}
+
+.Button-close {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  padding: 3px 10px;
+}
+
+.Cart-empty {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
 }

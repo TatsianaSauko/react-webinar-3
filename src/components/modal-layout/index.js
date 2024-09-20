@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function ModalLayout({ children, onClose, isOpen }) {
+function ModalLayout({ children, isOpen }) {
   const cn = bem('ModalLayout');
 
   if (!isOpen) {
@@ -12,19 +12,13 @@ function ModalLayout({ children, onClose, isOpen }) {
 
   return (
     <div className={cn()}>
-      <div className={cn('content')}>
-        <button onClick={onClose} className="Button-close">
-          Закрыть
-        </button>
-        {children}
-      </div>
+      <div className={cn('content')}>{children}</div>
     </div>
   );
 }
 
 ModalLayout.propTypes = {
   children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
 };
 

@@ -23,9 +23,3 @@
   border-radius: 10px;
   overflow: hidden;
 }
-
-.Button-close {
-  position: absolute;
-  top: 32px;
-  right: 32px;
-}

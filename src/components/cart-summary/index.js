@@ -5,7 +5,7 @@ import './style.css';
 
 function CartSummary({ cart = [], onOpenCart }) {
   const uniqueItemsTotal = cart.length;
-  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const formattedPrice = formatPrice(totalPrice);
 
   const cartContent =
@@ -22,7 +22,9 @@ function CartSummary({ cart = [], onOpenCart }) {
   return (
     <div className="CartSummary">
       B корзине: {cartContent}
-      <button onClick={() => onOpenCart(true)}>Перейти</button>
+      <button className="Button-go" onClick={() => onOpenCart(true)}>
+        Перейти
+      </button>
     </div>
   );
 }
