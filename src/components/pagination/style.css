@@ -1,0 +1,31 @@
+.pagination {
+  padding: 20px 21px;
+  text-align: end;
+}
+
+.btn {
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.4px;
+  transition: background-color 0.3s ease;
+}
+.btn_active {
+  background-color: #1d88dd;
+  color: white;
+}
+
+.btn_pagination {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.btn_pagination:hover {
+  background: rgb(221, 220, 220);
+}
+
+.btn-dots {
+  background-color: white;
+  color: rgba(204, 204, 204, 1);
+}
