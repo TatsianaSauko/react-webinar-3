@@ -10,8 +10,9 @@
   line-height: 18.4px;
   transition: background-color 0.3s ease;
 }
+
 .btn_active {
-  background-color: #1d88dd;
+  background-color: rgba(0, 135, 233, 1);
   color: white;
 }
 

@@ -63,33 +63,44 @@ class Catalog extends StoreModule {
   generatePages(currentPage, totalPages) {
     const pages = [];
 
-    if (currentPage > 2) {
-      pages.push(1);
-    }
+    if (totalPages <= 5) {
+      // Если страниц 5 или меньше, показываем все страницы без многоточий
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage === 1) {
+        // Специальная логика для первой страницы
+        pages.push(1, 2, 3, '...', totalPages);
+      } else {
+        if (currentPage > 2) {
+          pages.push(1);
+        }
 
-    if (currentPage > 3) {
-      pages.push('...');
-    }
+        if (currentPage > 3) {
+          pages.push('...');
+        }
 
-    const startPage = Math.max(2, currentPage - 1);
-    const endPage = Math.min(totalPages - 1, currentPage + 1);
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
+        const startPage = Math.max(2, currentPage - 1);
+        const endPage = Math.min(totalPages - 1, currentPage + 1);
+        for (let i = startPage; i <= endPage; i++) {
+          pages.push(i);
+        }
 
-    if (currentPage < totalPages - 2) {
-      pages.push('...');
-    }
+        if (currentPage < totalPages - 2) {
+          pages.push('...');
+        }
 
-    if (currentPage < totalPages - 1) {
+        if (currentPage < totalPages - 1) {
+          pages.push(totalPages);
+        }
+      }
+    }
+    if (!pages.includes(totalPages)) {
       pages.push(totalPages);
     }
     if (!pages.includes(1)) {
       pages.unshift(1);
-    }
-
-    if (!pages.includes(totalPages)) {
-      pages.push(totalPages);
     }
 
     return pages;
