@@ -33,3 +33,48 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+// paginationUtils.js
+export const generatePages = (currentPage, totalPages) => {
+  const pages = [];
+
+  if (totalPages <= 5) {
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+  } else {
+    if (currentPage === 1) {
+      pages.push(1, 2, 3, '...', totalPages);
+    } else {
+      if (currentPage > 2) {
+        pages.push(1);
+      }
+
+      if (currentPage > 3) {
+        pages.push('...');
+      }
+
+      const startPage = Math.max(2, currentPage - 1);
+      const endPage = Math.min(totalPages - 1, currentPage + 1);
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push('...');
+      }
+
+      if (currentPage < totalPages - 1) {
+        pages.push(totalPages);
+      }
+    }
+  }
+  if (!pages.includes(totalPages)) {
+    pages.push(totalPages);
+  }
+  if (!pages.includes(1)) {
+    pages.unshift(1);
+  }
+
+  return pages;
+};

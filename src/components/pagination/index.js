@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { generatePages } from '../../utils';
 import './style.css';
 
-const Pagination = ({ currentPage, pages, onPageChange }) => {
+const Pagination = ({ onPageChange, currentPage, totalPages }) => {
+  const [pages, setPages] = useState([]);
+
+  useEffect(() => {
+    const pages = generatePages(currentPage, totalPages);
+    setPages(pages);
+  }, [currentPage, totalPages]);
+
   return (
     <div className="pagination">
       {pages.map((page, index) => (

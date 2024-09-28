@@ -16,8 +16,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path=":id" element={<Product />} />
+        <Route path="/" element={<Navigate to="/products" />} />
+        <Route path="/products" element={<Main />} />
+        <Route path="/products/:id" element={<Product />} />
       </Routes>
       {activeModal === 'basket' && <Basket />}
     </Router>

@@ -5,7 +5,7 @@ import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from '../../utils';
 import './style.css';
 
-function Item({ item, onAdd = () => {} }) {
+function Item({ item, link, onAdd = () => {} }) {
   const cn = bem('Item');
 
   const callbacks = {
@@ -14,8 +14,7 @@ function Item({ item, onAdd = () => {} }) {
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{item._id}</div>*/}
-      <Link to={`/${item._id}`} className={cn('title')}>
+      <Link to={link} className={cn('title')}>
         {item.title}
       </Link>
       <div className={cn('actions')}>
@@ -31,6 +30,7 @@ Item.propTypes = {
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     price: PropTypes.number,
+    link: PropTypes.string,
   }).isRequired,
   onAdd: PropTypes.func,
 };

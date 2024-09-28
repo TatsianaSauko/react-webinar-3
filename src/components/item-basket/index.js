@@ -5,7 +5,7 @@ import { numberFormat } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function ItemBasket({ item, onRemove = () => {} }) {
+function ItemBasket({ item, link, onRemove = () => {} }) {
   const cn = bem('ItemBasket');
 
   const callbacks = {
@@ -14,8 +14,7 @@ function ItemBasket({ item, onRemove = () => {} }) {
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{item._id}</div>*/}
-      <Link to={`/${item._id}`} className={cn('title')}>
+      <Link to={link} className={cn('title')}>
         {item.title}
       </Link>
       <div className={cn('right')}>
@@ -32,6 +31,7 @@ function ItemBasket({ item, onRemove = () => {} }) {
 ItemBasket.propTypes = {
   item: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    link: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
     amount: PropTypes.number,
