@@ -6,10 +6,10 @@ import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
 
 const AuthButtons = () => {
-  const { t } = useTranslate();
-  const navigate = useNavigate();
   const store = useStore();
-  const isAuthenticated = localStorage.getItem('authToken');
+  const navigate = useNavigate();
+  const { t } = useTranslate();
+  const isAuthenticated = useSelector(state => !!state.user.token);
   const select = useSelector(state => ({
     name: state.user.name,
   }));
@@ -18,7 +18,7 @@ const AuthButtons = () => {
     if (isAuthenticated) {
       try {
         await store.actions.user.signOut();
-        navigate('/');
+        navigate('/', { state: { from: window.location.pathname } });
       } catch (e) {
         console.error('Sign out failed', e);
       }

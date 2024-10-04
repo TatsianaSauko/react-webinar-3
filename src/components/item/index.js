@@ -2,8 +2,8 @@ import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from '../../utils';
-import './style.css';
 import { Link } from 'react-router-dom';
+import './style.css';
 
 function Item(props) {
   const cn = bem('Item');

@@ -13,13 +13,13 @@ import Profile from './profile';
  * Маршрутизация по страницам и модалкам
  */
 function App() {
-  const activeModal = useSelector(state => state.modals.name);
   const store = useStore();
-  const token = localStorage.getItem('authToken');
+  const activeModal = useSelector(state => state.modals.name);
+  const isAuthenticated = useSelector(state => !!state.user.token);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      if (token) {
+      if (isAuthenticated) {
         await store.actions.user.loadProfile();
       }
     };

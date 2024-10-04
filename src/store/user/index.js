@@ -6,18 +6,18 @@ class UserState extends StoreModule {
       name: '',
       phone: '',
       email: '',
-      token: '',
+      token: localStorage.getItem('authToken') || '',
       waiting: false,
     };
   }
 
   async loadProfile() {
-    const token = this.getState().token || localStorage.getItem('authToken');
+    const token = this.getState().token;
     if (!token) {
       throw new Error('No token found');
     }
 
-    this.setState({ waiting: true });
+    this.setState({ ...this.getState(), waiting: true });
 
     try {
       const response = await fetch('/api/v1/users/self?fields=*', {
@@ -26,16 +26,13 @@ class UserState extends StoreModule {
         },
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to load profile');
-      }
-
       const json = await response.json();
 
       this.setState({
-        name: json.result.profile.name,
+        name: json.result.username,
         email: json.result.email,
         phone: json.result.profile.phone,
+        token,
         waiting: false,
       });
     } catch (e) {
@@ -62,7 +59,9 @@ class UserState extends StoreModule {
       });
 
       if (!response.ok) {
-        throw new Error('Authorization failed');
+        const errorData = await response.json();
+        const errorMessage = errorData.error?.data?.issues?.[0]?.message || 'Authorization failed';
+        throw new Error(errorMessage);
       }
 
       const json = await response.json();
@@ -85,6 +84,7 @@ class UserState extends StoreModule {
         token: '',
         waiting: false,
       });
+      console.error(e.message);
       throw e;
     }
   }

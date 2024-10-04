@@ -1,28 +1,10 @@
 import { cn as bem } from '@bem-react/classname';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useStore from '../../hooks/use-store';
-import useTranslate from '../../hooks/use-translate';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './style.css';
 
-function FormLogin() {
+function FormLogin({ login, setLogin, password, setPassword, error, handleSubmit, t }) {
   const cn = bem('FormLogin');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const store = useStore();
-  const { t } = useTranslate();
-  const navigate = useNavigate();
-
-  const handleSubmit = async event => {
-    event.preventDefault();
-    try {
-      await store.actions.user.signIn(login, password);
-      navigate('/');
-    } catch (e) {
-      setError(e.message);
-    }
-  };
 
   return (
     <div className={cn()}>
@@ -57,4 +39,18 @@ function FormLogin() {
   );
 }
 
-export default FormLogin;
+FormLogin.propTypes = {
+  login: PropTypes.string.isRequired,
+  setLogin: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+};
+
+FormLogin.defaultProps = {
+  error: '',
+};
+
+export default React.memo(FormLogin);

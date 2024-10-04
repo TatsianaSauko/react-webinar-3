@@ -17,11 +17,11 @@ function CatalogFilter() {
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
     category: state.catalog.params.category,
-    categories: state.catalog.categories,
+    categories: state.category.categories,
   }));
 
   useEffect(() => {
-    store.actions.catalog.fetchCategories();
+    store.actions.category.fetchCategories();
   }, [store]);
 
   const callbacks = {

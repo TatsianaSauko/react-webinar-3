@@ -9,9 +9,10 @@ import LocaleSelect from '../../containers/locale-select';
 import ProfileCard from '../../components/profile-card';
 import AuthButtons from '../../containers/auth-buttons';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/use-auth';
 
 function Profile() {
-  const token = localStorage.getItem('authToken');
+  const isAuthenticated = useAuth();
   const navigate = useNavigate();
   const select = useSelector(state => ({
     data: {
@@ -23,10 +24,10 @@ function Profile() {
   }));
 
   useEffect(() => {
-    if (!token) {
+    if (!isAuthenticated) {
       navigate('/login');
     }
-  }, [token, navigate]);
+  }, [isAuthenticated, navigate]);
 
   const { t } = useTranslate();
 
