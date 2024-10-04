@@ -23,7 +23,7 @@ const AuthButtons = () => {
         console.error('Sign out failed', e);
       }
     } else {
-      navigate('/login');
+      navigate('/login', { state: { from: window.location.pathname } });
     }
   };
 

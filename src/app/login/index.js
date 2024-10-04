@@ -6,7 +6,7 @@ import Navigation from '../../containers/navigation';
 import LocaleSelect from '../../containers/locale-select';
 import FormLogin from '../../components/form-login';
 import AuthButtons from '../../containers/auth-buttons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 
 function Login() {
@@ -16,12 +16,13 @@ function Login() {
   const [error, setError] = useState('');
   const store = useStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
       await store.actions.user.signIn(login, password);
-      navigate('/profile');
+      navigate(location.state?.from || '/profile');
     } catch (e) {
       setError(e.message);
     }
