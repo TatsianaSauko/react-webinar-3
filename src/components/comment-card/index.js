@@ -1,15 +1,17 @@
-import { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { formatDate } from '../../utils/format-date';
 import './style.css';
 
-function CommentCard({ comment, onReply }) {
+function CommentCard({ comment, onReply, isCurrentUser, currentUserName }) {
   const cn = bem('CommentCard');
   return (
     <div className={cn()}>
       <div className={cn('prop')}>
-        <div className={cn('name')}>{comment.author.profile.name}</div>
+        <div className={isCurrentUser ? cn('name', 'authorized') : cn('name')}>
+          {comment?.author?.profile?.name ? comment.author.profile.name : currentUserName}
+        </div>
         <div className={cn('date')}>{formatDate(comment.dateUpdate)}</div>
       </div>
       <div className={cn('text')}>{comment.text}</div>
@@ -23,6 +25,8 @@ function CommentCard({ comment, onReply }) {
 CommentCard.propTypes = {
   comment: PropTypes.object.isRequired,
   onReply: PropTypes.func.isRequired,
+  isCurrentUser: PropTypes.bool.isRequired,
+  currentUserName: PropTypes.string,
 };
 
-export default memo(CommentCard);
+export default React.memo(CommentCard);

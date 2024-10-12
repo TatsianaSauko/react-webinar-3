@@ -17,6 +17,7 @@ import commentsActions from '../../store-redux/comments/actions';
 import Comments from '../../containers/comments';
 import useSelector from '../../hooks/use-selector';
 import SectionLayout from '../../components/section-layout';
+import listToTree from '../../utils/list-to-tree';
 
 function Article() {
   const store = useStore();
@@ -42,7 +43,12 @@ function Article() {
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
 
-  const exists = useSelector(state => state.session.exists);
+  const selectSession = state => ({
+    exists: state.session.exists,
+    currentUserId: state.session.user?._id,
+    currentUserName: state.session.user?.username,
+  });
+  const { exists, currentUserId, currentUserName } = useSelector(selectSession, shallowequal);
 
   const { t } = useTranslate();
 
@@ -59,11 +65,13 @@ function Article() {
           },
         };
         dispatch(commentsActions.create(commentData));
-        dispatch(commentsActions.load(params.id));
       },
       [dispatch, params.id],
     ),
   };
+
+  const commentsTree = listToTree(select.comments);
+  const commentsToRender = commentsTree.length > 0 ? commentsTree[0].children : [];
 
   return (
     <PageLayout>
@@ -78,10 +86,11 @@ function Article() {
       <Spinner active={select.waitingComments}>
         <SectionLayout commentsCount={select.comments.length}>
           <Comments
-            comments={select.comments}
+            comments={commentsToRender}
             onAddComment={callbacks.onAddComment}
             isAuthenticated={exists}
-            parentId={params.id}
+            currentUserId={currentUserId}
+            currentUserName={currentUserName}
           />
         </SectionLayout>
       </Spinner>

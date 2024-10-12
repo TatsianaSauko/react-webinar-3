@@ -32,3 +32,7 @@
   padding-left: 0;
   cursor: pointer;
 }
+
+.authorized {
+  color: rgba(102, 102, 102, 1);
+}

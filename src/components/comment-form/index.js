@@ -9,7 +9,8 @@ function CommentForm({ title, onSubmit, onCancel, placeholder }) {
 
   const handleSubmit = () => {
     if (text.trim()) {
-      onSubmit(text);
+      const formattedText = text.replace(/(\S{20})(?=\S)/g, '$1\n');
+      onSubmit(formattedText);
       setText('');
     }
   };
