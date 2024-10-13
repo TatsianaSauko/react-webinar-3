@@ -6,6 +6,8 @@ import './style.css';
 
 function CommentCard({ comment, onReply, isCurrentUser, currentUserName }) {
   const cn = bem('CommentCard');
+  const formattedText = comment.text.replace(/(\S{70})(?=\S)/g, '$1\n');
+
   return (
     <div className={cn()}>
       <div className={cn('prop')}>
@@ -14,7 +16,7 @@ function CommentCard({ comment, onReply, isCurrentUser, currentUserName }) {
         </div>
         <div className={cn('date')}>{formatDate(comment.dateUpdate)}</div>
       </div>
-      <div className={cn('text')}>{comment.text}</div>
+      <div className={cn('text')}>{formattedText}</div>
       <button className={cn('button')} onClick={() => onReply(comment._id)}>
         Ответить
       </button>

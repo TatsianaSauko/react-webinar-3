@@ -3,7 +3,6 @@
 }
 
 .CommentCard {
-  /* padding: 25px 40px 30px 40px; */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -18,6 +17,10 @@
 
 .CommentCard-name {
   font-weight: 700;
+}
+
+.CommentCard-text {
+  line-height: 16.1px;
 }
 
 .CommentCard-date {

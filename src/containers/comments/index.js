@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CommentForm from '../../components/comment-form';
 import CommentCard from '../../components/comment-card';
 import LoginPrompt from '../../components/login-prompt';
@@ -8,6 +8,13 @@ const MAX_DEPTH = 5;
 function Comments({ comments, onAddComment, isAuthenticated, currentUserId, currentUserName }) {
   const [replyingTo, setReplyingTo] = useState(null);
   const [showMainForm, setShowMainForm] = useState(true);
+  const replyFormRef = useRef(null);
+
+  useEffect(() => {
+    if (replyFormRef.current) {
+      replyFormRef.current.scrollIntoView({ behavior: 'smooth', block: "center" });
+    }
+  }, [replyingTo]);
 
   const handleReplyClick = id => {
     setReplyingTo(id);
@@ -38,17 +45,14 @@ function Comments({ comments, onAddComment, isAuthenticated, currentUserId, curr
             isCurrentUser={isCurrentUser}
             currentUserName={currentUserName}
           />
-          {comment.children &&
-            comment.children.length > 0 &&
-            renderComments(comment.children, currentDepth + 1)}
+          {comment.children && comment.children.length > 0 && renderComments(comment.children, currentDepth + 1)}
           {replyingTo === comment._id && (
-            <div style={{ marginLeft: '30px' }}>
+            <div style={{ marginLeft: '30px' }} ref={replyFormRef}>
               {isAuthenticated ? (
                 <CommentForm
                   title="Добавить ответ"
                   onSubmit={text => handleReplySubmit(text, comment._id)}
                   onCancel={handleCancelReply}
-                  placeholder="Введите ваш ответ"
                 />
               ) : (
                 <LoginPrompt showCancel={true} onCancel={handleCancelReply} />
@@ -68,7 +72,6 @@ function Comments({ comments, onAddComment, isAuthenticated, currentUserId, curr
           <CommentForm
             title="Добавить комментарий"
             onSubmit={text => handleReplySubmit(text, null)}
-            placeholder="Введите ваш комментарий"
           />
         ) : (
           <LoginPrompt showCancel={false} />

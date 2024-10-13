@@ -46,7 +46,7 @@ function Article() {
   const selectSession = state => ({
     exists: state.session.exists,
     currentUserId: state.session.user?._id,
-    currentUserName: state.session.user?.username,
+    currentUserName: state.session.user?.profile?.name,
   });
   const { exists, currentUserId, currentUserName } = useSelector(selectSession, shallowequal);
 
